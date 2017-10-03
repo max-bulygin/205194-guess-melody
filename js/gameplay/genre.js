@@ -94,7 +94,7 @@ const html = `
   </section>`;
 
 const genreScreen = stringToElement(html);
-const checkboxes = [...genreScreen.getElementsByTagName(`input`)];
+const checkboxes = Array.from(genreScreen.getElementsByTagName(`input`));
 const submit = genreScreen.querySelector(`.genre-answer-send`);
 const screens = [success, timeout, attempts];
 const isAnswerPresent = () => {
