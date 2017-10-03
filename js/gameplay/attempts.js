@@ -1,11 +1,11 @@
 /**
  * Результат игры: проигрыш закончились попытки
  *
- * @imports functions stringToElement & showScreen
- * @exports DOM element
+ * @module gameplay/attempts
  */
 
 import {stringToElement, showScreen} from '../util.js';
+import welcome from './welcome';
 
 const html = `
   <section class="main main--result">
@@ -17,5 +17,8 @@ const html = `
   </section>`;
 
 const attemptsScreen = stringToElement(html);
+attemptsScreen.querySelector(`.main-replay`).onclick = () => {
+  showScreen(welcome);
+};
 
 export default attemptsScreen;

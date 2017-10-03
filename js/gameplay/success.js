@@ -1,11 +1,11 @@
 /**
  * Результат игры: выигрыш
  *
- * @imports functions stringToElement & showScreen
- * @exports DOM element
+ * @module gameplay/success
  */
 
 import {stringToElement, showScreen} from '../util.js';
+import welcome from './welcome';
 
 const html = `
   <section class="main main--result">
@@ -20,5 +20,8 @@ const html = `
   </section>`;
 
 const successScreen = stringToElement(html);
+successScreen.querySelector(`.main-replay`).onclick = () => {
+  showScreen(welcome);
+};
 
 export default successScreen;

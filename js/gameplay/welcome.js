@@ -1,8 +1,7 @@
 /**
  * Приветствие
  *
- * @imports functions stringToElement & showScreen
- * @exports DOM element
+ * @module gameplay/welcome
  */
 
 import {stringToElement, showScreen} from '../util.js';

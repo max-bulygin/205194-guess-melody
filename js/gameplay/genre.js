@@ -1,11 +1,13 @@
 /**
  * Игра на выбор жанра
  *
- * @imports functions stringToElement & showScreen
- * @exports DOM element
+ * @module gameplay/genre
  */
 
 import {stringToElement, showScreen} from '../util.js';
+import success from './success';
+import timeout from './timeout';
+import attempts from './attempts';
 
 const html = `
   <section class="main main--level main--level-genre">
@@ -86,11 +88,36 @@ const html = `
           <label class="genre-answer-check" for="a-4"></label>
         </div>
 
-        <button class="genre-answer-send" type="submit">Ответить</button>
+        <button class="genre-answer-send" type="submit" disabled>Ответить</button>
       </form>
     </div>
   </section>`;
 
 const genreScreen = stringToElement(html);
+const checkboxes = [...genreScreen.getElementsByTagName(`input`)];
+const submit = genreScreen.querySelector(`.genre-answer-send`);
+const screens = [success, timeout, attempts];
+const isAnswerPresent = () => {
+  let isPresent = false;
+
+  checkboxes.map((item) => {
+    if (item.checked) {
+      isPresent = true;
+    }
+  });
+
+  return isPresent;
+};
+
+checkboxes.map((item) => {
+  item.onchange = () => {
+    submit.disabled = !isAnswerPresent();
+  };
+});
+
+submit.onclick = (evt) => {
+  evt.preventDefault();
+  showScreen(screens[Math.floor(Math.random() * 3)]);
+};
 
 export default genreScreen;

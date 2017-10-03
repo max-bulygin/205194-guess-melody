@@ -1,11 +1,11 @@
 /**
  * Игра на выбор исполнителя
  *
- * @imports functions stringToElement & showScreen
- * @exports DOM element
+ * @module gameplay/artist
  */
 
-import {stringToElement} from '../util.js';
+import {stringToElement, showScreen} from '../util.js';
+import genre from './genre.js';
 
 const html = `
   <section class="main main--level main--level-artist">
@@ -69,5 +69,12 @@ const html = `
   </section>`;
 
 const artistScreen = stringToElement(html);
+const answersForm = artistScreen.querySelector(`.main-list`);
 
-export default stringToElement(html);
+answersForm.onclick = (evt) => {
+  if (evt.target.className === `main-answer-r`) {
+    showScreen(genre);
+  }
+};
+
+export default artistScreen;
