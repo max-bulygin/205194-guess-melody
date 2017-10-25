@@ -1,114 +1,33 @@
-export const answerSetScore17 = [
-  {
-    correct: true,
-    time: 10
-  },
-  {
-    correct: true,
-    time: 20
-  },
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 12
-  },
-  {
-    correct: true,
-    time: 13
-  },
-  {
-    correct: true,
-    time: 40
-  },
-  {
-    correct: true,
-    time: 16
-  },
-  {
-    correct: true,
-    time: 30
-  },
-  {
-    correct: true,
-    time: 25
-  },
-  {
-    correct: true,
-    time: 11
-  }
-]; // total score 17
-
-export const answerSetScore10 = [
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 31
-  },
-  {
-    correct: true,
-    time: 30
-  },
-  {
-    correct: true,
-    time: 31
-  }
-]; // total score 10
-
-export const leaderBoard = [4, 5, 8, 10, 11];
+const QUESTIONS_TOTAL = 10;
+const FAST_ANSWER_TIME = 30;
+const MISTAKES_ALLOWED = 3;
+const Score = {
+  WRONG_ANSWER: -2,
+  CORRECT_ANSWER: 1,
+  FAST_ANSWER: 2,
+  GAME_OVER: -1
+};
 
 /**
  * Функция вычисляет количество очков, набранных игроком
  *
  * @param {Array} answers
- * @param {Number} lives
  * @returns {Number} score
  */
 
-export const getScore = (answers, lives) => {
+export const getScore = (answers) => {
   let score;
-  if (lives > 0) {
-    if (answers.length !== 10) {
-      score = -1;
-    } else {
-      score = 0;
-      answers.map((el) => {
-        if (!el.correct) {
-          score += -2;
-        } else {
-          score += el.time < 30 ? 2 : 1;
-        }
-      });
-    }
+  if (answers.length !== QUESTIONS_TOTAL) {
+    score = Score.GAME_OVER;
+  } else {
+    score = answers.reduce((sum, el) => {
+      if (!el.correct) {
+        sum += Score.WRONG_ANSWER;
+      } else {
+        sum += el.time < FAST_ANSWER_TIME ? Score.FAST_ANSWER : Score.CORRECT_ANSWER;
+      }
+      return sum;
+    }, 0);
   }
   return score;
 };
@@ -123,18 +42,40 @@ export const getScore = (answers, lives) => {
 
 export const getMessage = (leaders, player) => {
   let message;
+  const playerScore = player.score;
+  const stats = [...leaders, playerScore].sort((a, b) => a - b);
   if (player.timeLeft === 0) {
     message = `Время вышло! Вы не успели отгадать все мелодии`;
-  } else if (player.notesLeft === 0) {
+  } else if (player.mistakes > MISTAKES_ALLOWED) {
     message = `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
   } else {
-    leaders.push(player.score);
-    leaders.sort((a, b) => a - b);
-    const totalPlayers = leaders.length;
-    const currentIndex = leaders.indexOf(player.score);
+    const totalPlayers = stats.length;
+    const currentIndex = stats.indexOf(playerScore);
     const place = totalPlayers - currentIndex;
     const percent = ((currentIndex / totalPlayers) * 100).toFixed();
     message = `Вы заняли ${place} место из ${totalPlayers} игроков. Это лучше чем у ${percent}% игроков`;
   }
   return message;
+};
+
+/**
+ * Функция таймера
+ *
+ * @param {Number} time
+ * @returns {Object}
+ */
+
+export const timer = (time) => {
+  if (time <= 0 || !Number.isInteger(time)) {
+    throw new Error(`Parameter must be positive integer number`);
+  }
+  return {
+    value: time,
+    tick() {
+      if (this.value !== 0) {
+        this.value--;
+      }
+      return this.value !== 0;
+    }
+  };
 };
