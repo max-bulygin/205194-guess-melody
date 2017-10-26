@@ -6,6 +6,7 @@
 
 import {stringToElement, showScreen} from '../util.js';
 import artist from './artist.js';
+import {LEVELS} from '../data/game-data';
 
 const html = `
   <section class="main main--welcome">
@@ -22,7 +23,7 @@ const html = `
 const welcomeScreen = stringToElement(html);
 
 welcomeScreen.querySelector(`.main-play`).onclick = () => {
-  showScreen(artist);
+  showScreen(artist(LEVELS[`level-1`]));
 };
 
 export default welcomeScreen;

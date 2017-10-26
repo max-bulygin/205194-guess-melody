@@ -6,19 +6,22 @@
 
 import {stringToElement, showScreen} from '../util.js';
 import genre from './genre.js';
-import header from '../templates/header';
-import main from '../templates/main';
-import {initialState as initial, LEVELS} from "../data/game-data";
+import getHeader from '../templates/header';
+import getContent from '../templates/main';
+import {initialState as initial} from "../data/game-data";
 
-const html = header(initial) + main(LEVELS[`level-${initial.currentQuestion}`]);
+export default (data) => {
+  const html = `
+  ${getHeader(initial)}
+  ${getContent(data)}`;
+  const screen = stringToElement(html);
+  const answersForm = screen.querySelector(`.main-list`);
 
-const artistScreen = stringToElement(html);
-const answersForm = artistScreen.querySelector(`.main-list`);
+  answersForm.onclick = (evt) => {
+    if (evt.target.className === `main-answer-r`) {
+      showScreen(genre);
+    }
+  };
 
-answersForm.onclick = (evt) => {
-  if (evt.target.className === `main-answer-r`) {
-    showScreen(genre);
-  }
+  return screen;
 };
-
-export default artistScreen;

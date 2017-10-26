@@ -11,7 +11,7 @@ const getSeconds = (time) => {
   return seconds < 10 ? `0${seconds}` : seconds;
 };
 
-const headerTemplate = (state) =>`
+export default (state) =>`
   <section class="main main--level main--level-artist">
     <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
       <circle
@@ -28,5 +28,3 @@ const headerTemplate = (state) =>`
     <div class="main-mistakes">
       ${new Array(state.mistakes).fill(WRONG_ANSWER_TMPL).join(``)}
     </div>`;
-
-export default headerTemplate;
