@@ -1,25 +1,59 @@
 const QUESTIONS_TOTAL = 10;
 const FAST_ANSWER_TIME = 30;
 const MISTAKES_ALLOWED = 3;
-const Score = {
-  WRONG_ANSWER: -2,
-  CORRECT_ANSWER: 1,
-  FAST_ANSWER: 2,
-  GAME_OVER: -1
+const GAME_INCOMPLETE = -1;
+const Answer = {
+  WRONG: -2,
+  CORRECT: 1,
+  FAST: 2
+};
+
+export const LEVELS = {
+  'level-1': {
+    type: 1,
+    question: `Кто исполняет эту песню?`,
+    src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+    answers: [
+      {
+        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        artist: `Kevin MacLeod`
+      },
+      {
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`
+      },
+      {
+        image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`
+      }
+    ]
+  },
+  'level-2': {
+    type: 0,
+    question: `Выберите инди-рок треки`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      }
+    ]
+  }
 };
 
 export const initialState = {
   time: 300,
   mistakes: 0,
-  question: 0
+  currentQuestion: 1,
+  userAnswers: [],
 };
-
-const level = {
-  question: `Кто исполняет эту песню?`,
-  answers: {
-
-  }
-}
 
 /**
  * Функция вычисляет количество очков, набранных игроком
@@ -31,13 +65,13 @@ const level = {
 export const getScore = (answers) => {
   let score;
   if (answers.length !== QUESTIONS_TOTAL) {
-    score = Score.GAME_OVER;
+    score = GAME_INCOMPLETE;
   } else {
     score = answers.reduce((sum, el) => {
       if (!el.correct) {
-        sum += Score.WRONG_ANSWER;
+        sum += Answer.WRONG;
       } else {
-        sum += el.time < FAST_ANSWER_TIME ? Score.FAST_ANSWER : Score.CORRECT_ANSWER;
+        sum += el.time < FAST_ANSWER_TIME ? Answer.FAST : Answer.CORRECT;
       }
       return sum;
     }, 0);
