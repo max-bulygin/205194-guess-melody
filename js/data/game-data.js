@@ -8,6 +8,19 @@ const Score = {
   GAME_OVER: -1
 };
 
+export const initialState = {
+  time: 300,
+  mistakes: 0,
+  question: 0
+};
+
+const level = {
+  question: `Кто исполняет эту песню?`,
+  answers: {
+
+  }
+}
+
 /**
  * Функция вычисляет количество очков, набранных игроком
  *
