@@ -8,8 +8,10 @@ const Answer = {
   FAST: 2
 };
 
+export const ARTIST_LEVEL = 1;
+
 export const LEVELS = {
-  'level-1': {
+  'level-0': {
     type: 1,
     question: `Кто исполняет эту песню?`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
@@ -51,8 +53,12 @@ export const LEVELS = {
 export const initialState = {
   time: 300,
   mistakes: 0,
-  currentQuestion: 1,
-  userAnswers: [],
+  currentLevel: 0,
+  userAnswers: [
+    {
+      correct: true,
+      time: 30
+    }]
 };
 
 /**

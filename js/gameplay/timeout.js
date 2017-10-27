@@ -5,7 +5,7 @@
  */
 
 import {stringToElement, showScreen} from '../util.js';
-import welcome from './welcome';
+// import welcome from './welcome';
 
 const html = `
   <section class="main main--result">
@@ -17,8 +17,8 @@ const html = `
   </section>`;
 
 const timeoutScreen = stringToElement(html);
-timeoutScreen.querySelector(`.main-replay`).onclick = () => {
-  showScreen(welcome);
-};
+// timeoutScreen.querySelector(`.main-replay`).onclick = () => {
+//   showScreen(welcome);
+// };
 
 export default timeoutScreen;

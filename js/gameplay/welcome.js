@@ -4,11 +4,11 @@
  * @module gameplay/welcome
  */
 
-import {stringToElement, showScreen} from '../util.js';
-import artist from './artist.js';
-import {LEVELS} from '../data/game-data';
+import {stringToElement, getNextScreen} from '../util.js';
+import {LEVELS} from "../data/game-data";
 
-const html = `
+export default (data) => {
+  const html = `
   <section class="main main--welcome">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
     <button class="main-play">Начать игру</button>
@@ -19,11 +19,12 @@ const html = `
       Удачи!
     </p>
   </section>`;
-
-const welcomeScreen = stringToElement(html);
-
-welcomeScreen.querySelector(`.main-play`).onclick = () => {
-  showScreen(artist(LEVELS[`level-1`]));
+  const screen = stringToElement(html);
+  screen.querySelector(`.main-play`).onclick = () => {
+    data.currentLevel++;
+    const level = LEVELS[`level-${data.currentLevel}`];
+    console.log(level);
+    getNextScreen(data, level);
+  };
+  return screen;
 };
-
-export default welcomeScreen;
