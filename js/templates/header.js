@@ -2,7 +2,7 @@ const SECONDS_PER_MINUTE = 60;
 const WRONG_ANSWER_TMPL = `<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`;
 
 const getMinutes = (time) => {
-  const minutes = Math.floor(time/SECONDS_PER_MINUTE);
+  const minutes = Math.floor(time / SECONDS_PER_MINUTE);
   return minutes < 10 ? `0${minutes}` : minutes;
 };
 

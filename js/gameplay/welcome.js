@@ -20,10 +20,9 @@ export default (data) => {
     </p>
   </section>`;
   const screen = stringToElement(html);
+  const level = LEVELS[`level-${data.currentLevel}`];
   screen.querySelector(`.main-play`).onclick = () => {
     data.currentLevel++;
-    const level = LEVELS[`level-${data.currentLevel}`];
-    console.log(level);
     getNextScreen(data, level);
   };
   return screen;

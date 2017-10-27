@@ -23,7 +23,7 @@ export default (data, level) => {
 
   submit.onclick = (evt) => {
     evt.preventDefault();
-    getNextScreen(data);
+    getNextScreen(data, level);
   };
 
   return screen;

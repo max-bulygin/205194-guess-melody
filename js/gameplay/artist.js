@@ -17,7 +17,7 @@ export default (data, level) => {
 
   answersForm.onclick = (evt) => {
     if (evt.target.className === `main-answer-r`) {
-      getNextScreen(data);
+      getNextScreen(data, level);
     }
   };
 
