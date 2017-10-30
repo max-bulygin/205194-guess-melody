@@ -16,7 +16,8 @@ export const playerControls = (node) => {
   players.forEach((player) => {
     const track = player.querySelector(`audio`);
     const button = player.querySelector(`button`);
-    button.onclick = function () {
+    button.onclick = function (evt) {
+      evt.preventDefault();
       if (this.classList.contains(`player-control--pause`)) {
         this.classList.remove(`player-control--pause`);
         track.play();
