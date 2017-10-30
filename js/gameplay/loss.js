@@ -5,9 +5,13 @@
  */
 
 import {stringToElement, showScreen} from '../util.js';
+import {initialState as initial} from "./data/game-data";
+import welcome from './gameplay/welcome';
+
 // import welcome from './welcome';
 
-const html = `
+export default (data) => {
+  const html = `
   <section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
@@ -16,9 +20,8 @@ const html = `
     <span role="button" tabindex="0" class="main-replay">Попробовать ещё раз</span>
   </section>`;
 
-const timeoutScreen = stringToElement(html);
-// timeoutScreen.querySelector(`.main-replay`).onclick = () => {
-//   showScreen(welcome);
-// };
-
-export default timeoutScreen;
+  const screen = stringToElement(html);
+  screen.querySelector(`.main-replay`).onclick = () => {
+    showScreen(welcome(initial));
+  };
+};
