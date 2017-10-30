@@ -24,7 +24,7 @@ describe(`getScore`, () => {
     assert.equal(-1, getScore(normalAnswers.pop()));
   });
   it(`should return 4 when player gave 2 wrong answers (no fast)`, () => {
-    assert.equal(6, getScore([{correct: true, time: 30}, {correct: false, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}, {correct: false, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}]));
+    assert.equal(4, getScore([{correct: true, time: 30}, {correct: false, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}, {correct: false, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}, {correct: true, time: 30}]));
   });
 });
 
