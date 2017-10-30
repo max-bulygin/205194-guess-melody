@@ -20,8 +20,8 @@ export default (data, level) => {
   playerControls(gameScreen);
   answersForm.onclick = (evt) => {
     if (evt.target.className === `main-answer-r`) {
-      const isSelectedCorrect = evt.target.value === `true`;
-      const dataUpdate = processUserAnswer(isSelectedCorrect, data);
+      const isCorrectAnswer = evt.target.value === `true`;
+      const dataUpdate = processUserAnswer(isCorrectAnswer, data);
       getNextScreen(dataUpdate, LEVELS[dataUpdate.currentLevel]);
     }
   };

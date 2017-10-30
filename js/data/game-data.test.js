@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {getScore, getMessage, timer} from './game-data.js';
+import {getScore, getMessage, timer, isSelectedCorrect} from './game-data';
 
 const fastAnswers = new Array(10).fill({
   correct: true,
@@ -111,18 +111,9 @@ describe(`Timer`, () => {
   });
 });
 
-const reduce = (arr) => {
-  return arr.reduce((acc, it) => {
-    if (it.value === `true`) {
-      acc = it.checked;
-    }
-    return acc;
-  }, false);
-};
-
-describe(`Reduce`, () => {
+describe(`isSelectedCorrect`, () => {
   it(`should return false when no correct answer`, () => {
-    assert.equal(false, reduce([
+    assert.equal(false, isSelectedCorrect([
       {
         checked: true,
         value: `false`
@@ -138,7 +129,7 @@ describe(`Reduce`, () => {
     ]));
   });
   it(`should return true when correct answer present`, () => {
-    assert.equal(true, reduce([
+    assert.equal(true, isSelectedCorrect([
       {
         checked: true,
         value: `true`
@@ -154,7 +145,7 @@ describe(`Reduce`, () => {
     ]));
   });
   it(`should return true when 2 correct answer present`, () => {
-    assert.equal(true, reduce([
+    assert.equal(true, isSelectedCorrect([
       {
         checked: true,
         value: `true`
@@ -174,7 +165,7 @@ describe(`Reduce`, () => {
     ]));
   });
   it(`should return false when 1 selected from 2 correct`, () => {
-    assert.equal(false, reduce([
+    assert.equal(false, isSelectedCorrect([
       {
         checked: true,
         value: `true`
@@ -190,6 +181,26 @@ describe(`Reduce`, () => {
       {
         checked: false,
         value: `true`
+      }
+    ]));
+  });
+  it(`should return false when 1 selected from 2 correct`, () => {
+    assert.equal(false, isSelectedCorrect([
+      {
+        checked: false,
+        value: `true`
+      },
+      {
+        checked: true,
+        value: `true`
+      },
+      {
+        checked: false,
+        value: `false`
+      },
+      {
+        checked: false,
+        value: `false`
       }
     ]));
   });

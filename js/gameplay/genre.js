@@ -4,10 +4,10 @@
  * @module gameplay/genre
  */
 
-import {stringToElement, getNextScreen, isAnswerPresent} from '../util.js';
+import {stringToElement, getNextScreen, isAnswerPresent} from '../util';
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
-import {LEVELS, processUserAnswer} from "../data/game-data";
+import {LEVELS, processUserAnswer, isSelectedCorrect} from "../data/game-data";
 import {playerControls} from "../templates/player";
 
 export default (data, level) => {
@@ -25,13 +25,8 @@ export default (data, level) => {
   });
   submit.onclick = (evt) => {
     evt.preventDefault();
-    const isSelectedCorrect = checkboxes.reduce((acc, it) => {
-      if (it.value === `true`) {
-        acc = it.checked;
-      }
-      return acc;
-    }, false);
-    const dataUpdate = processUserAnswer(isSelectedCorrect, data);
+    const isCorrectAnswer = isSelectedCorrect(checkboxes);
+    const dataUpdate = processUserAnswer(isCorrectAnswer, data);
     getNextScreen(dataUpdate, LEVELS[dataUpdate.currentLevel]);
   };
 

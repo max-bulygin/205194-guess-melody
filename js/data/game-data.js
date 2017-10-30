@@ -131,6 +131,19 @@ export const getFastAnswers = (arr) => {
 };
 
 /**
+ * Функция проверяет ответ пользователя при множественном выборе
+ *
+ * @param {Array} arr
+ * @returns {Boolean}
+ */
+
+export const isSelectedCorrect = (arr) => {
+  return arr.every((it) => {
+    return it.checked.toString() === it.value;
+  });
+};
+
+/**
  * Функция таймера
  *
  * @param {Number} time
