@@ -1,6 +1,8 @@
+import musicData from './music-data';
+
+const GAME = `Угадай мелодию`;
 const QUESTIONS_TOTAL = 10;
 const FAST_ANSWER_TIME = 30;
-const MISTAKES_ALLOWED = 3;
 const GAME_INCOMPLETE = -1;
 const Answer = {
   WRONG: -2,
@@ -8,57 +10,46 @@ const Answer = {
   FAST: 2
 };
 
+export const MISTAKES_ALLOWED = 3;
 export const ARTIST_LEVEL = 1;
-
-export const LEVELS = {
-  'level-0': {
-    type: 1,
-    question: `Кто исполняет эту песню?`,
-    src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
-    answers: [
-      {
-        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
-        artist: `Kevin MacLeod`
-      },
-      {
-        image: `https://i.vimeocdn.com/portrait/992615_300x300`,
-        artist: `Jingle Punks`
-      },
-      {
-        image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
-        artist: `Audionautix`
-      }
-    ]
+export const LEVELS = musicData;
+export const SCREENS = {
+  welcome: {
+    title: GAME,
+    button: `Начать игру`,
+    rules: {
+      heading: `Правила игры`,
+      text: `Правила просты&nbsp;— за&nbsp;5 минут ответить на все вопросы.<br>
+      Ошибиться можно 3 раза.<br>
+      Удачи!`
+    }
   },
-  'level-2': {
-    type: 0,
-    question: `Выберите инди-рок треки`,
-    answers: [
-      {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
-      },
-      {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
-      },
-      {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
-      },
-      {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
-      }
-    ]
+  timeout: {
+    title: GAME,
+    heading: `Увы и ах!`,
+    message: `Время вышло!<br>Вы не успели отгадать все мелодии`,
+    button: `Попробовать ещё раз`
+  },
+  attempts: {
+    title: GAME,
+    heading: `Какая жалость!`,
+    message: `У вас закончились все попытки.<br>Ничего, повезёт в следующий раз!`,
+    button: `Попробовать ещё раз`
+  },
+  winner: {
+    title: GAME,
+    heading: `Вы настоящий меломан!`,
+    stats: null,
+    button: `Сыграть ещё раз`
   }
 };
 
 export const initialState = {
+  result: null,
   time: 300,
   mistakes: 0,
   currentLevel: 0,
-  userAnswers: [
-    {
-      correct: true,
-      time: 30
-    }]
+  userAnswers: []
 };
 
 /**
@@ -97,18 +88,36 @@ export const getMessage = (leaders, player) => {
   let message;
   const playerScore = player.score;
   const stats = [...leaders, playerScore].sort((a, b) => a - b);
-  if (player.timeLeft === 0) {
-    message = `Время вышло! Вы не успели отгадать все мелодии`;
-  } else if (player.mistakes > MISTAKES_ALLOWED) {
-    message = `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
-  } else {
-    const totalPlayers = stats.length;
-    const currentIndex = stats.indexOf(playerScore);
-    const place = totalPlayers - currentIndex;
-    const percent = ((currentIndex / totalPlayers) * 100).toFixed();
-    message = `Вы заняли ${place} место из ${totalPlayers} игроков. Это лучше чем у ${percent}% игроков`;
-  }
+  const totalPlayers = stats.length;
+  const currentIndex = stats.indexOf(playerScore);
+  const place = totalPlayers - currentIndex;
+  const percent = ((currentIndex / totalPlayers) * 100).toFixed();
+  message = `Вы заняли ${place} место из ${totalPlayers} игроков. Это лучше чем у ${percent}% игроков`;
   return message;
+};
+
+/**
+ * Функция обрабатывает ответы пользователя
+ *
+ * @param {Object} data - object with a current game state
+ * @param {Boolean} answer - answer given by player
+ * @returns {Object} dataUpdate
+ */
+
+export const processUserAnswer = (answer, data) => {
+  const dataUpdate = JSON.parse(JSON.stringify(data));
+  if (answer !== true) {
+    dataUpdate.mistakes++;
+  }
+  dataUpdate.currentLevel++;
+  dataUpdate.userAnswers.push({
+    correct: answer,
+    time: 30
+  });
+  if (dataUpdate.userAnswers.length === 10) {
+    dataUpdate.isComplete = true;
+  }
+  return dataUpdate;
 };
 
 /**

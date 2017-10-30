@@ -1,6 +1,7 @@
 import artistAnswers from './artist-answer';
 import genreAnswers from './genre-answer';
 import {ARTIST_LEVEL} from '../data/game-data';
+import player from "./player";
 
 export default (level) => {
   const title = `<div class="main-wrap"><h2 class="title main-title">${level.question}</h2>`;
@@ -9,15 +10,7 @@ export default (level) => {
   if (level.type === ARTIST_LEVEL) {
     content = `
       ${title}
-      <div class="player-wrapper">
-        <div class="player">
-          <audio autoplay src="${level.src}"></audio>
-          <button class="player-control player-control--pause"></button>
-          <div class="player-track">
-            <span class="player-status"></span>
-          </div>
-        </div>
-      </div>
+      ${player(level)}
       ${artistAnswers(level.answers)}
       ${footer}`;
   } else {

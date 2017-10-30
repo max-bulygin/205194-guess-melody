@@ -1,11 +1,10 @@
-import welcome from './gameplay/welcome';
 import artist from './gameplay/artist';
 import genre from './gameplay/genre';
-// import success from './gameplay/success';
-// import attempts from './gameplay/attempts';
-// import timeout from './gameplay/timeout';
-import {ARTIST_LEVEL} from "./data/game-data";
+import loss from './gameplay/loss';
+import win from './gameplay/win';
+import {ARTIST_LEVEL, SCREENS as screen, MISTAKES_ALLOWED} from "./data/game-data";
 
+const SECONDS_PER_MINUTE = 60;
 const appContainer = document.querySelector(`.app`);
 
 /**
@@ -32,7 +31,7 @@ export const showScreen = (element) => {
 };
 
 /**
- * Функция проверяет выбран ли хотя бы одни ответ на старнице
+ * Функция проверяет выбран ли хотя бы одни ответ на странице
  *
  * @param {Array} elements
  * @returns {Boolean} isPresent
@@ -59,10 +58,43 @@ export const isAnswerPresent = (elements) => {
 
 export const getNextScreen = (game, level) => {
   if (game.time === 0) {
-    return showScreen(timeout);
-  } else if (game.mistakes < 0) {
-    return showScreen(attempts);
+    return showScreen(loss(screen.timeout));
+  } else if (game.mistakes > MISTAKES_ALLOWED) {
+    return showScreen(loss(screen.attempts));
+  } else if (game.isComplete) {
+    return showScreen(win(screen.winner, game));
   }
-  return showScreen(artist(game, level));
-  // return level.type === ARTIST_LEVEL ? showScreen(artist(game, level)) : showScreen(genre(game, level));
+  return level.type === ARTIST_LEVEL ? showScreen(artist(game, level)) : showScreen(genre(game, level));
+};
+
+/**
+ * Функция возвращает количество минут получая время в секундах
+ *
+ * @param {Number} time
+ * @param {Boolean} leadZero
+ * @return {*}
+ */
+
+export const getMinutes = (time, leadZero = false) => {
+  const minutes = Math.floor(time / SECONDS_PER_MINUTE);
+  if (leadZero) {
+    return minutes < 10 ? `0${minutes}` : minutes;
+  }
+  return minutes;
+};
+
+/**
+ * Функция возвращает остаток секунд получая время в секундах
+ *
+ * @param {Number} time
+ * @param {Boolean} leadZero
+ * @return {*}
+ */
+
+export const getSeconds = (time, leadZero = false) => {
+  const seconds = time % SECONDS_PER_MINUTE;
+  if (leadZero) {
+    return seconds < 10 ? `0${seconds}` : seconds;
+  }
+  return seconds;
 };

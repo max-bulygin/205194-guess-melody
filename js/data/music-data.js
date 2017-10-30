@@ -1,44 +1,202 @@
 export default [
   {
-    artist: `Kevin MacLeod`,
-    name: `Long Stroll`,
-    image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
-    src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
-    genre: `Jazz`
-  },
-  {
-    artist: `Jingle Punks`,
-    name: `In the Land of Rhinoplasty`,
-    image: `https://i.vimeocdn.com/portrait/992615_300x300`,
+    type: 1,
+    question: `Кто исполняет эту песню?`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
-    genre: `Rock`
+    answers: [
+      {
+        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        artist: `Kevin MacLeod`,
+        correct: true
+      },
+      {
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`
+      },
+      {
+        image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`
+      }
+    ]
   },
   {
-    artist: `Audionautix`,
-    name: `Travel Light`,
-    image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
-    src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
-    genre: `Country`
+    type: 0,
+    question: `Выберите инди-рок треки`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      }
+    ]
   },
   {
-    artist: `Riot`,
-    name: `	Level Plane`,
-    image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
-    src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
-    genre: `R&B`
+    type: 0,
+    question: `Выберите рок треки`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      }
+    ]
   },
   {
-    artist: `Jingle Punks`,
-    name: `Lucky Day`,
-    image: `https://i.vimeocdn.com/portrait/992615_300x300`,
-    src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-    genre: `Pop`
+    type: 1,
+    question: `Кто исполняет эту песню?`,
+    src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+    answers: [
+      {
+        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        artist: `Kevin MacLeod`,
+        correct: true
+      },
+      {
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`
+      },
+      {
+        image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`
+      }
+    ]
   },
   {
-    artist: `Gunnar Olsen`,
-    name: `Home Stretch`,
-    image: `https://f4.bcbits.com/img/0004181452_10.jpg`,
-    src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-    genre: `Electronic`
+    type: 0,
+    question: `Выберите инди-рок треки`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      }
+    ]
+  },
+  {
+    type: 1,
+    question: `Кто исполняет эту песню?`,
+    src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+    answers: [
+      {
+        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        artist: `Kevin MacLeod`,
+        correct: true
+      },
+      {
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`
+      },
+      {
+        image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`
+      }
+    ]
+  },
+  {
+    type: 0,
+    question: `Выберите инди-рок треки`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      }
+    ]
+  },
+  {
+    type: 1,
+    question: `Кто исполняет эту песню?`,
+    src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+    answers: [
+      {
+        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        artist: `Kevin MacLeod`,
+        correct: true
+      },
+      {
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`
+      },
+      {
+        image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`
+      }
+    ]
+  },
+  {
+    type: 0,
+    question: `Выберите инди-рок треки`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        correct: true
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+      }
+    ]
+  },
+  {
+    type: 1,
+    question: `Кто исполняет эту песню?`,
+    src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+    answers: [
+      {
+        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        artist: `Kevin MacLeod`,
+        correct: true
+      },
+      {
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`
+      },
+      {
+        image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`
+      }
+    ]
   }
 ];

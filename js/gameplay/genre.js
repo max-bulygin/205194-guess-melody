@@ -7,24 +7,33 @@
 import {stringToElement, getNextScreen, isAnswerPresent} from '../util.js';
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
+import {LEVELS, processUserAnswer} from "../data/game-data";
+import {playerControls} from "../templates/player";
 
 export default (data, level) => {
   const html = `
   ${getHeader(data)}
   ${getContent(level)}`;
-  const screen = stringToElement(html);
-  const checkboxes = Array.from(screen.getElementsByTagName(`input`));
-  const submit = screen.querySelector(`.genre-answer-send`);
-  checkboxes.map((item) => {
-    item.onchange = () => {
+  const gameScreen = stringToElement(html);
+  const checkboxes = Array.from(gameScreen.getElementsByTagName(`input`));
+  const submit = gameScreen.querySelector(`.genre-answer-send`);
+  playerControls(gameScreen);
+  checkboxes.map((it) => {
+    it.onchange = () => {
       submit.disabled = !isAnswerPresent(checkboxes);
     };
   });
-
   submit.onclick = (evt) => {
     evt.preventDefault();
-    getNextScreen(data, level);
+    const isSelectedCorrect = checkboxes.reduce((acc, it) => {
+      if (it.value === `true`) {
+        acc = it.checked;
+      }
+      return acc;
+    }, false);
+    const dataUpdate = processUserAnswer(isSelectedCorrect, data);
+    getNextScreen(dataUpdate, LEVELS[dataUpdate.currentLevel]);
   };
 
-  return screen;
+  return gameScreen;
 };

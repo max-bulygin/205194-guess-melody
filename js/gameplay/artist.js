@@ -4,22 +4,27 @@
  * @module gameplay/artist
  */
 
-import {stringToElement, getNextScreen} from '../util.js';
+import {stringToElement, getNextScreen} from '../util';
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
+import {LEVELS, processUserAnswer} from "../data/game-data";
+import {playerControls} from "../templates/player";
 
 export default (data, level) => {
   const html = `
   ${getHeader(data)}
   ${getContent(level)}`;
-  const screen = stringToElement(html);
-  const answersForm = screen.querySelector(`.main-list`);
+  const gameScreen = stringToElement(html);
+  const answersForm = gameScreen.querySelector(`.main-list`);
 
+  playerControls(gameScreen);
   answersForm.onclick = (evt) => {
     if (evt.target.className === `main-answer-r`) {
-      getNextScreen(data, level);
+      const isSelectedCorrect = evt.target.value === `true`;
+      const dataUpdate = processUserAnswer(isSelectedCorrect, data);
+      getNextScreen(dataUpdate, LEVELS[dataUpdate.currentLevel]);
     }
   };
 
-  return screen;
+  return gameScreen;
 };
