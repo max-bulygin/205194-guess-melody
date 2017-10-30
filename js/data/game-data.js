@@ -121,6 +121,16 @@ export const processUserAnswer = (answer, data) => {
 };
 
 /**
+ * Функция считает быстрые ответы пользователя
+ */
+
+export const getFastAnswers = (arr) => {
+  return arr.reduce((acc, it) => {
+    return acc + it.time < FAST_ANSWER_TIME ? 1 : 0;
+  }, 0);
+};
+
+/**
  * Функция таймера
  *
  * @param {Number} time

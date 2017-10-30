@@ -5,7 +5,7 @@
  */
 
 import {stringToElement, showScreen, getMinutes, getSeconds} from '../util';
-import {SCREENS as screen, getScore, getMessage} from "../data/game-data";
+import {SCREENS as screen, getScore, getMessage, getFastAnswers} from "../data/game-data";
 import welcome from './welcome';
 
 export default (content, game) => {
@@ -15,7 +15,7 @@ export default (content, game) => {
     score: totalScore,
     time: game.time,
     mistakes: totalMistakes,
-    fast: 3,
+    fast: getFastAnswers(game.userAnswers),
     statMessage: getMessage([], {
       score: totalScore,
       mistakes: totalMistakes
