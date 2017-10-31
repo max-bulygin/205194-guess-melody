@@ -16,13 +16,14 @@ export const bindPlayerEvents = (node) => {
   players.forEach((it) => {
     const track = it.querySelector(`audio`);
     const button = it.querySelector(`button`);
-    button.onclick = function (evt) {
+    button.onclick = (evt) =>{
+      const target = evt.target;
       evt.preventDefault();
-      if (this.classList.contains(`player-control--pause`)) {
-        this.classList.remove(`player-control--pause`);
+      if (target.classList.contains(`player-control--pause`)) {
+        target.classList.remove(`player-control--pause`);
         track.play();
       } else {
-        this.classList.add(`player-control--pause`);
+        target.classList.add(`player-control--pause`);
         track.pause();
       }
     };
