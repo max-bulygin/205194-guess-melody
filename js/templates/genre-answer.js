@@ -1,4 +1,4 @@
-import player from './player';
+import {player} from './player';
 
 export default (answers) => `<form class="genre">
   ${[...answers].map((answer, index) => {

@@ -1,6 +1,5 @@
 import musicData from './music-data';
 
-const GAME = `Угадай мелодию`;
 const QUESTIONS_TOTAL = 10;
 const FAST_ANSWER_TIME = 30;
 const GAME_INCOMPLETE = -1;
@@ -15,8 +14,6 @@ export const ARTIST_LEVEL = 1;
 export const LEVELS = musicData;
 export const SCREENS = {
   welcome: {
-    title: GAME,
-    button: `Начать игру`,
     rules: {
       heading: `Правила игры`,
       text: `Правила просты&nbsp;— за&nbsp;5 минут ответить на все вопросы.<br>
@@ -25,19 +22,16 @@ export const SCREENS = {
     }
   },
   timeout: {
-    title: GAME,
     heading: `Увы и ах!`,
     message: `Время вышло!<br>Вы не успели отгадать все мелодии`,
     button: `Попробовать ещё раз`
   },
   attempts: {
-    title: GAME,
     heading: `Какая жалость!`,
     message: `У вас закончились все попытки.<br>Ничего, повезёт в следующий раз!`,
     button: `Попробовать ещё раз`
   },
   winner: {
-    title: GAME,
     heading: `Вы настоящий меломан!`,
     stats: null,
     button: `Сыграть ещё раз`
@@ -106,7 +100,7 @@ export const getMessage = (leaders, player) => {
 
 export const processUserAnswer = (answer, data) => {
   const dataUpdate = JSON.parse(JSON.stringify(data));
-  if (answer !== true) {
+  if (!answer) {
     dataUpdate.mistakes++;
   }
   dataUpdate.currentLevel++;
@@ -114,7 +108,7 @@ export const processUserAnswer = (answer, data) => {
     correct: answer,
     time: 30
   });
-  if (dataUpdate.userAnswers.length === 10) {
+  if (dataUpdate.userAnswers.length === QUESTIONS_TOTAL) {
     dataUpdate.isComplete = true;
   }
   return dataUpdate;
@@ -125,9 +119,7 @@ export const processUserAnswer = (answer, data) => {
  */
 
 export const getFastAnswers = (arr) => {
-  return arr.reduce((acc, it) => {
-    return acc + it.time < FAST_ANSWER_TIME ? 1 : 0;
-  }, 0);
+  return arr.filter(({time}) => time < FAST_ANSWER_TIME).length;
 };
 
 /**

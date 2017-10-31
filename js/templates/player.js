@@ -1,4 +1,4 @@
-export default (audio) => `
+export const player = (audio) => `
   <div class="player-wrapper">
     <div class="player">
       <audio
@@ -11,11 +11,11 @@ export default (audio) => `
     </div>
   </div>`;
 
-export const playerControls = (node) => {
+export const bindPlayerEvents = (node) => {
   const players = node.querySelectorAll(`.player`);
-  players.forEach((player) => {
-    const track = player.querySelector(`audio`);
-    const button = player.querySelector(`button`);
+  players.forEach((it) => {
+    const track = it.querySelector(`audio`);
+    const button = it.querySelector(`button`);
     button.onclick = function (evt) {
       evt.preventDefault();
       if (this.classList.contains(`player-control--pause`)) {

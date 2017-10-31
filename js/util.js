@@ -2,7 +2,7 @@ import artist from './gameplay/artist';
 import genre from './gameplay/genre';
 import loss from './gameplay/loss';
 import win from './gameplay/win';
-import {ARTIST_LEVEL, SCREENS as screen, MISTAKES_ALLOWED} from "./data/game-data";
+import {ARTIST_LEVEL, SCREENS as screen, MISTAKES_ALLOWED, LEVELS} from "./data/game-data";
 
 const SECONDS_PER_MINUTE = 60;
 const appContainer = document.querySelector(`.app`);
@@ -38,25 +38,20 @@ export const showScreen = (element) => {
  */
 
 export const isAnswerPresent = (elements) => {
-  let isPresent = false;
-
-  elements.forEach((element) => {
-    if (element.checked) {
-      isPresent = true;
-    }
+  return elements.some((element) => {
+    return element.checked;
   });
-
-  return isPresent;
 };
 
 /**
  * Функция отвечает за логику отображения экранов
  *
  * @param {Object} game
- * @param {Object} level
+ * @returns {Function}
  */
 
-export const getNextScreen = (game, level) => {
+export const getNextScreen = (game) => {
+  const level = LEVELS[game.currentLevel];
   if (game.time === 0) {
     return showScreen(loss(screen.timeout));
   } else if (game.mistakes > MISTAKES_ALLOWED) {

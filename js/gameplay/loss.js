@@ -11,7 +11,7 @@ import welcome from './welcome';
 export default (content) => {
   const html = `
   <section class="main main--result">
-    <section class="logo" title="${content.title}"><h1>${content.title}</h1></section>
+    <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">${content.heading}</h2>
     <div class="main-stat">${content.message}</div>
