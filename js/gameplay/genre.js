@@ -4,7 +4,7 @@
  * @module gameplay/genre
  */
 
-import {stringToElement, getNextScreen, isAnswerPresent} from '../util';
+import {stringToElement, renderNextScreen, isAnswerPresent} from '../util';
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
 import {processUserAnswer, isSelectedCorrect} from "../data/game-data";
@@ -27,7 +27,7 @@ export default (data, level) => {
     evt.preventDefault();
     const isCorrectAnswer = isSelectedCorrect(checkboxes);
     const dataUpdate = processUserAnswer(isCorrectAnswer, data);
-    getNextScreen(dataUpdate);
+    renderNextScreen(dataUpdate);
   };
 
   return gameScreen;

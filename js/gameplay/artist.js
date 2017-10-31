@@ -4,7 +4,7 @@
  * @module gameplay/artist
  */
 
-import {stringToElement, getNextScreen} from '../util';
+import {stringToElement, renderNextScreen} from '../util';
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
 import {processUserAnswer} from "../data/game-data";
@@ -22,7 +22,7 @@ export default (data, level) => {
     if (evt.target.className === `main-answer-r`) {
       const isCorrectAnswer = evt.target.value === `true`;
       const dataUpdate = processUserAnswer(isCorrectAnswer, data);
-      getNextScreen(dataUpdate);
+      renderNextScreen(dataUpdate);
     }
   };
 

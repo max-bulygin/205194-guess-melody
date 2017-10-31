@@ -50,13 +50,15 @@ export const isAnswerPresent = (elements) => {
  * @returns {Function}
  */
 
-export const getNextScreen = (game) => {
+export const renderNextScreen = (game) => {
   const level = LEVELS[game.currentLevel];
   if (game.time === 0) {
     return showScreen(loss(screen.timeout));
-  } else if (game.mistakes > MISTAKES_ALLOWED) {
+  }
+  if (game.mistakes > MISTAKES_ALLOWED) {
     return showScreen(loss(screen.attempts));
-  } else if (game.isComplete) {
+  }
+  if (game.isComplete) {
     return showScreen(win(screen.winner, game));
   }
   return level.type === ARTIST_LEVEL ? showScreen(artist(game, level)) : showScreen(genre(game, level));

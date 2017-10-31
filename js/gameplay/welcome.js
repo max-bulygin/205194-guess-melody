@@ -4,7 +4,7 @@
  * @module gameplay/welcome
  */
 
-import {stringToElement, getNextScreen} from '../util';
+import {stringToElement, renderNextScreen} from '../util';
 import {initialState as initial} from "../data/game-data";
 
 export default (content) => {
@@ -18,7 +18,7 @@ export default (content) => {
   const game = Object.assign({}, initial);
   const gameScreen = stringToElement(html);
   gameScreen.querySelector(`.main-play`).onclick = () => {
-    getNextScreen(game);
+    renderNextScreen(game);
   };
   return gameScreen;
 };
