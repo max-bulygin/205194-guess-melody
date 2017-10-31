@@ -1,13 +1,11 @@
 import artistAnswers from './artist-answer';
 import genreAnswers from './genre-answer';
 import {ARTIST_LEVEL} from '../data/game-data';
-import {player} from "./player";
 
 export default (level) => {
   const content = level.type === ARTIST_LEVEL
     ?
-    `${player(level)}
-     ${artistAnswers(level.answers)}`
+    `${artistAnswers(level)}`
     :
     `${genreAnswers(level.answers)}`;
   return `
