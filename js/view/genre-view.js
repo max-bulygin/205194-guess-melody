@@ -1,6 +1,5 @@
 import AbstractView from './view';
 import {isAnswerPresent} from '../util';
-import {processUserAnswer, isSelectedCorrect} from "../data/game-data";
 import {bindPlayerEvents} from "../templates/player";
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
@@ -27,9 +26,7 @@ export default class GenreView extends AbstractView {
 
     submit.onclick = (evt) => {
       evt.preventDefault();
-      const isCorrectAnswer = isSelectedCorrect(checkboxes);
-      const stateUpdate = processUserAnswer(isCorrectAnswer, this.data);
-      this.onAnswer(stateUpdate);
+      this.onAnswer(checkboxes, this.data);
     };
 
     const players = this.element.querySelectorAll(`.player`);

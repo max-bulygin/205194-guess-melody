@@ -1,5 +1,4 @@
 import AbstractView from './view';
-import {processUserAnswer} from "../data/game-data";
 import {bindPlayerEvents} from "../templates/player";
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
@@ -19,11 +18,7 @@ export default class ArtistView extends AbstractView {
     const answersForm = this.element.querySelector(`.main-list`);
     answersForm.onclick = (evt) => {
       const target = evt.target;
-      if (target.className === `main-answer-r`) {
-        const isCorrectAnswer = target.value === `true`;
-        const stateUpdate = processUserAnswer(isCorrectAnswer, this.data);
-        this.onAnswer(stateUpdate);
-      }
+      this.onAnswer(target, this.data);
     };
 
     const players = this.element.querySelectorAll(`.player`);
