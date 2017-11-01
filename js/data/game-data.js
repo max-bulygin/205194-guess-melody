@@ -9,6 +9,7 @@ const Answer = {
   FAST: 2
 };
 
+export const TIME_TOTAL = 10;
 export const MISTAKES_ALLOWED = 3;
 export const ARTIST_LEVEL = 1;
 export const LEVELS = musicData;
@@ -40,7 +41,7 @@ export const SCREENS = {
 
 export const initialState = {
   result: null,
-  time: 300,
+  time: TIME_TOTAL,
   mistakes: 0,
   currentLevel: 0,
   userAnswers: []
@@ -95,10 +96,11 @@ export const getMessage = (leaders, player) => {
  *
  * @param {Object} data - object with a current game state
  * @param {Boolean} answer - answer given by player
+ * @param {Number} time - time player spent for answer
  * @returns {Object} dataUpdate
  */
 
-export const processUserAnswer = (answer, data) => {
+export const processUserAnswer = (answer, data, time) => {
   const dataUpdate = JSON.parse(JSON.stringify(data));
   if (!answer) {
     dataUpdate.mistakes++;
@@ -106,8 +108,9 @@ export const processUserAnswer = (answer, data) => {
   dataUpdate.currentLevel++;
   dataUpdate.userAnswers.push({
     correct: answer,
-    time: 30
+    time
   });
+  // console.log(dataUpdate);
   if (dataUpdate.userAnswers.length === QUESTIONS_TOTAL) {
     dataUpdate.isComplete = true;
   }
@@ -133,26 +136,4 @@ export const isSelectedCorrect = (arr) => {
   return arr.every((it) => {
     return it.checked.toString() === it.value;
   });
-};
-
-/**
- * Функция таймера
- *
- * @param {Number} time
- * @returns {Object}
- */
-
-export const timer = (time) => {
-  if (time <= 0 || !Number.isInteger(time)) {
-    throw new Error(`Parameter must be positive integer number`);
-  }
-  return {
-    value: time,
-    tick() {
-      if (this.value !== 0) {
-        this.value--;
-      }
-      return this.value !== 0;
-    }
-  };
 };

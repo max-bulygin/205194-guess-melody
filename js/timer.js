@@ -1,10 +1,16 @@
+import {TIME_TOTAL} from "./data/game-data";
+
 const SECOND = 1000;
 
-export default class Timer {
-  set time(newTime) {
-    if (newTime <= 0 || !Number.isInteger(newTime)) {
+class Timer {
+  constructor(newTime) {
+    if (newTime < 0 || !Number.isInteger(newTime)) {
       throw new Error(`Parameter must be positive integer number`);
     }
+    this._time = newTime;
+  }
+
+  set time(newTime) {
     this._time = newTime;
   }
 
@@ -14,7 +20,7 @@ export default class Timer {
 
   tick() {
     if (this.time !== 0) {
-      this.time--;
+      this._time--;
     }
     return this.time !== 0;
   }
@@ -37,3 +43,5 @@ export default class Timer {
 
   }
 }
+
+export default new Timer(TIME_TOTAL);
