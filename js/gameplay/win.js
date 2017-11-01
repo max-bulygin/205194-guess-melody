@@ -14,6 +14,7 @@ const win = (game) => {
   view.onReplay = () => {
     showScreen(welcome());
   };
+  return view;
 };
 
 export default win;
