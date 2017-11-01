@@ -18,7 +18,10 @@ export default class ArtistView extends AbstractView {
     const answersForm = this.element.querySelector(`.main-list`);
     answersForm.onclick = (evt) => {
       const target = evt.target;
-      this.onAnswer(target, this.data);
+      if (target.className === `main-answer-r`) {
+        const isCorrectAnswer = target.value === `true`;
+        this.onAnswer(isCorrectAnswer, this.data);
+      }
     };
 
     const players = this.element.querySelectorAll(`.player`);

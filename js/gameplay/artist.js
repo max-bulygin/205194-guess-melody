@@ -10,12 +10,9 @@ import ArtistView from '../view/artist-view';
 
 const artist = (game, level) => {
   const view = new ArtistView(game, level);
-  view.onAnswer = (target, currentState) => {
-    if (target.className === `main-answer-r`) {
-      const isCorrectAnswer = target.value === `true`;
-      const stateUpdate = processUserAnswer(isCorrectAnswer, currentState);
-      renderNextScreen(stateUpdate);
-    }
+  view.onAnswer = (userAnswerStatus, currentState) => {
+    const stateUpdate = processUserAnswer(userAnswerStatus, currentState);
+    renderNextScreen(stateUpdate);
   };
   return view;
 };
