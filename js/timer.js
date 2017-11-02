@@ -37,6 +37,7 @@ class Timer {
 
   stop() {
     clearInterval(this.interval);
+    this._time = TIME_TOTAL;
   }
 
   onTick() {
