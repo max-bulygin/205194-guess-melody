@@ -4,7 +4,6 @@ import {isSelectedCorrect} from '../data/game-data';
 import {bindPlayerEvents} from "../templates/player";
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
-import timer from '../timer';
 import {getMinutes, getSeconds} from "../util";
 
 export default class GenreView extends AbstractView {
@@ -12,6 +11,8 @@ export default class GenreView extends AbstractView {
     super();
     this.data = data;
     this.level = level;
+    this.mins = this.element.querySelector(`.timer-value-mins`);
+    this.secs = this.element.querySelector(`.timer-value-secs`);
   }
   get template() {
     return `
@@ -35,20 +36,12 @@ export default class GenreView extends AbstractView {
 
     const players = this.element.querySelectorAll(`.player`);
     bindPlayerEvents(players);
-
-    const mins = this.element.querySelector(`.timer-value-mins`);
-    const secs = this.element.querySelector(`.timer-value-secs`);
-
-    timer.onTick = () => {
-      mins.innerHTML = getMinutes(this.data.time - 1, true);
-      secs.innerHTML = getSeconds(this.data.time - 1, true);
-      this.onTimerTick(this.data);
-    };
-  }
-  onAnswer() {
-
   }
   onTimerTick() {
+    this.mins.innerHTML = getMinutes(this.data, true);
+    this.secs.innerHTML = getSeconds(this.data, true);
+  }
+  onAnswer() {
 
   }
 }

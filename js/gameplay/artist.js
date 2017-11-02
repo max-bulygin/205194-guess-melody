@@ -16,8 +16,9 @@ const artist = (game, level) => {
     const stateUpdate = processUserAnswer(userAnswerStatus, currentState, answerTime);
     renderNextScreen(stateUpdate);
   };
-  view.onTimerTick = (state) => {
-    state.time = timer.time - 1;
+  timer.onTick = () => {
+    view.data = timer.time;
+    view.onTimerTick();
     answerTime++;
   };
   return view;
