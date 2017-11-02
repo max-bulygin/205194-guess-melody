@@ -107,9 +107,9 @@ describe(`Timer`, () => {
     timer.tick();
     assert.notEqual(-1, timer.time);
   });
-  it(`should return false`, () => {
+  it(`should return true`, () => {
     timer.time = 1;
-    assert.equal(false, timer.tick());
+    assert.equal(true, timer.tick());
   });
   it(`should return 0 when finished`, () => {
     timer.time = 1;
