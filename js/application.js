@@ -1,7 +1,6 @@
-import welcome from './gameplay/welcome';
-import level from './gameplay/level';
-// import newGameScreen from './game/game-screen';
-// import resultScreen from './result/result-screen';
+import welcome from './controller/welcome';
+import result from './controller/result';
+import level from './controller/level';
 
 export default class Application {
 
@@ -9,11 +8,11 @@ export default class Application {
     welcome.init();
   }
 
-  static showGame() {
-    level.init();
+  static showLevel(state) {
+    level.init(state);
   }
 
-  static showStats(model) {
-    // resultScreen.init(model);
+  static showResult(game) {
+    result.init(game);
   }
 }
