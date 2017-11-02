@@ -2,7 +2,6 @@ import AbstractView from './view';
 import {bindPlayerEvents} from "../templates/player";
 import getHeader from '../templates/header';
 import getContent from '../templates/main';
-import timer from '../timer';
 import {getMinutes, getSeconds} from "../util";
 
 export default class ArtistView extends AbstractView {
@@ -10,6 +9,8 @@ export default class ArtistView extends AbstractView {
     super();
     this.data = data;
     this.level = level;
+    this.mins = this.element.querySelector(`.timer-value-mins`);
+    this.secs = this.element.querySelector(`.timer-value-secs`);
   }
   get template() {
     return `
@@ -28,20 +29,12 @@ export default class ArtistView extends AbstractView {
 
     const players = this.element.querySelectorAll(`.player`);
     bindPlayerEvents(players);
-
-    const mins = this.element.querySelector(`.timer-value-mins`);
-    const secs = this.element.querySelector(`.timer-value-secs`);
-
-    timer.onTick = () => {
-      mins.innerHTML = getMinutes(this.data.time - 1, true);
-      secs.innerHTML = getSeconds(this.data.time - 1, true);
-      this.onTimerTick(this.data);
-    };
-  }
-  onAnswer() {
-
   }
   onTimerTick() {
+    this.mins.innerHTML = getMinutes(this.data.time, true);
+    this.secs.innerHTML = getSeconds(this.data.time, true);
+  }
+  onAnswer() {
 
   }
 }

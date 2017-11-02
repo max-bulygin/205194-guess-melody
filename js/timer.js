@@ -21,6 +21,7 @@ class Timer {
   tick() {
     if (this.time !== 0) {
       this._time--;
+      return true;
     }
     return this.time !== 0;
   }
@@ -37,6 +38,7 @@ class Timer {
 
   stop() {
     clearInterval(this.interval);
+    this._time = TIME_TOTAL;
   }
 
   onTick() {
