@@ -31,8 +31,8 @@ export default class ArtistView extends AbstractView {
     bindPlayerEvents(players);
   }
   onTimerTick() {
-    this.mins.innerHTML = getMinutes(this.data, true);
-    this.secs.innerHTML = getSeconds(this.data, true);
+    this.mins.innerHTML = getMinutes(this.data.time, true);
+    this.secs.innerHTML = getSeconds(this.data.time, true);
   }
   onAnswer() {
 

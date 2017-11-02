@@ -110,7 +110,6 @@ export const processUserAnswer = (answer, data, time) => {
     correct: answer,
     time
   });
-  // console.log(dataUpdate);
   if (dataUpdate.userAnswers.length === QUESTIONS_TOTAL) {
     dataUpdate.isComplete = true;
   }

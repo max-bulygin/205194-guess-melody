@@ -21,6 +21,7 @@ class Timer {
   tick() {
     if (this.time !== 0) {
       this._time--;
+      return true;
     }
     return this.time !== 0;
   }

@@ -17,7 +17,7 @@ const genre = (game, level) => {
     renderNextScreen(stateUpdate);
   };
   timer.onTick = () => {
-    view.data = timer.time;
+    view.data.time = timer.time;
     view.onTimerTick();
     answerTime++;
   };
