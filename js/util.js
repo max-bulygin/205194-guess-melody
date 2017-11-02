@@ -23,7 +23,7 @@ export const stringToElement = (str) => {
 /**
  * Функция принимает DOM элемент и отображает его
  *
- * @param {Node} view
+ * @param {} view
  */
 
 export const showScreen = (view) => {

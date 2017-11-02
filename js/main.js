@@ -1,12 +1,9 @@
 /**
  * Вход в приложение
  *
- * @import {function} showScreen
- * @import {Node} element welcome
+ * @import {Class} App
  */
 
-import {showScreen} from './util.js';
-// import {SCREENS as screen} from "./data/game-data";
-import welcome from './gameplay/welcome';
+import App from './application';
 
-showScreen(welcome());
+App.showWelcome();

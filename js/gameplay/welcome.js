@@ -4,15 +4,31 @@
  * @module gameplay/welcome
  */
 
-import {renderNextScreen} from '../util';
-import {initialState as initial, SCREENS} from "../data/game-data";
+import {renderNextScreen, showScreen} from '../util';
 import WelcomeView from '../view/welcome-view';
+import App from '../application';
 import timer from '../timer';
 
-const welcome = new WelcomeView(SCREENS.welcome);
-welcome.onStart = () => {
-  renderNextScreen(Object.assign({}, initial));
-  timer.start();
-};
+class Welcome {
+  constructor() {
+    this.view = new WelcomeView();
+  }
 
-export default () => welcome;
+  init() {
+    showScreen(this.view);
+    this.view.onStart = () => {
+      App.showGame();
+      timer.start();
+    };
+  }
+}
+
+export default new Welcome();
+
+// const welcome = new WelcomeView(SCREENS.welcome);
+// welcome.onStart = () => {
+//   renderNextScreen(Object.assign({}, initial));
+//   timer.start();
+// };
+//
+// export default () => welcome;
