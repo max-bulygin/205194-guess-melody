@@ -23,11 +23,11 @@ export const stringToElement = (str) => {
 /**
  * Функция принимает DOM элемент и отображает его
  *
- * @param {Node} element
+ * @param {Node} view
  */
 
-export const showScreen = (element) => {
-  appContainer.replaceChild(element, appContainer.querySelector(`.main`));
+export const showScreen = (view) => {
+  appContainer.replaceChild(view.element, appContainer.querySelector(`.main`));
 };
 
 /**
@@ -59,7 +59,7 @@ export const renderNextScreen = (game) => {
     return showScreen(loss(screen.attempts));
   }
   if (game.isComplete) {
-    return showScreen(win(screen.winner, game));
+    return showScreen(win(game));
   }
   return level.type === ARTIST_LEVEL ? showScreen(artist(game, level)) : showScreen(genre(game, level));
 };
