@@ -15,6 +15,7 @@ class Level {
     }
     this.setView();
     let answerTime = 0;
+    timer.time = this.game.time;
     showScreen(this.view);
     this.view.onAnswer = (userAnswerStatus, currentState) => {
       const stateUpdate = processUserAnswer(userAnswerStatus, currentState, answerTime);

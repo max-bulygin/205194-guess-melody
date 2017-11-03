@@ -2,6 +2,7 @@ import {initialState as initial} from './data/game-data';
 import welcome from './controller/welcome';
 import result from './controller/result';
 import level from './controller/level';
+import timer from './timer';
 
 const ControllerId = {
   WELCOME: ``,
@@ -37,6 +38,8 @@ export default class Application {
     };
     window.onhashchange = hashChangeHandler;
     hashChangeHandler();
+
+    timer.start();
   }
 
   static changeHash(id, data) {
@@ -58,5 +61,3 @@ export default class Application {
     location.hash = `${ControllerId.RESULT}=${saveGame(game)}`;
   }
 }
-
-Application.init();
