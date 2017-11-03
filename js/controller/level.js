@@ -1,4 +1,4 @@
-import {processUserAnswer, initialState as initial, LEVELS, ARTIST_LEVEL, MISTAKES_ALLOWED} from "../data/game-data";
+import {processUserAnswer, LEVELS, ARTIST_LEVEL, MISTAKES_ALLOWED} from "../data/game-data";
 import {showScreen} from '../util';
 import App from '../application';
 import GenreView from '../view/genre-view';
