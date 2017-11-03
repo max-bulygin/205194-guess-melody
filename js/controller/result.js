@@ -3,9 +3,11 @@ import LossView from "../view/loss-view";
 import WinView from "../view/win-view";
 import App from '../application';
 import {SCREENS, MISTAKES_ALLOWED} from "../data/game-data";
+import timer from '../timer';
 
 class Result {
   init(game) {
+    timer.stop();
     this.game = game;
     this.setView();
     showScreen(this.view);
