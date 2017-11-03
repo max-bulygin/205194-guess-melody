@@ -10,6 +10,7 @@ const Answer = {
 };
 
 export const TIME_TOTAL = 300;
+export const ALARM_TIME = 30;
 export const MISTAKES_ALLOWED = 3;
 export const ARTIST_LEVEL = 1;
 export const LEVELS = musicData;
@@ -34,13 +35,11 @@ export const SCREENS = {
   },
   winner: {
     heading: `Вы настоящий меломан!`,
-    stats: null,
     button: `Сыграть ещё раз`
   }
 };
 
 export const initialState = {
-  result: null,
   time: TIME_TOTAL,
   mistakes: 0,
   currentLevel: 0,
