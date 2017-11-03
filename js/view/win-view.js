@@ -1,5 +1,5 @@
 import {getMinutes, getSeconds} from '../util';
-import {getScore, getMessage, getFastAnswers, SCREENS} from "../data/game-data";
+import {getScore, getMessage, getFastAnswers, SCREENS, TIME_TOTAL} from "../data/game-data";
 import AbstractView from './view';
 
 export default class WinView extends AbstractView {
@@ -13,7 +13,7 @@ export default class WinView extends AbstractView {
     const totalMistakes = this.game.mistakes;
     const result = {
       score: totalScore,
-      time: this.game.time,
+      time: TIME_TOTAL - this.game.time,
       mistakes: totalMistakes,
       fast: getFastAnswers(this.game.userAnswers),
       statMessage: getMessage([], {
