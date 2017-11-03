@@ -35,13 +35,11 @@ export const SCREENS = {
   },
   winner: {
     heading: `Вы настоящий меломан!`,
-    stats: null,
     button: `Сыграть ещё раз`
   }
 };
 
 export const initialState = {
-  result: null,
   time: TIME_TOTAL,
   mistakes: 0,
   currentLevel: 0,
