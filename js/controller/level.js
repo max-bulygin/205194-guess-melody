@@ -7,7 +7,7 @@ import timer from '../timer';
 
 class Level {
   init(game) {
-    this.game = typeof game === `undefined` ? Object.assign({}, initial) : game;
+    this.game = game;
     this.level = LEVELS[this.game.currentLevel];
     if (!this.level || this.game.mistakes > MISTAKES_ALLOWED) {
       App.showResult(this.game);
