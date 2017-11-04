@@ -1,5 +1,4 @@
 import {showScreen} from '../util';
-import LoaderView from "../view/loader-view";
 import LossView from "../view/loss-view";
 import WinView from "../view/win-view";
 import App from '../application';
@@ -12,10 +11,7 @@ class Result {
     timer.stop();
     this.game = game;
     this.setView();
-    showScreen(this.view);
-    this.view.onReplay = () => {
-      App.showWelcome();
-    };
+    Result.showAndBind();
   }
 
   setView() {
@@ -34,8 +30,18 @@ class Result {
       Result.getLeaderBoard().
           then((board) => {
             that.view = new WinView(that.game, board);
+          }).then(() => {
+            Result.showAndBind();
           });
+      App.showLoader();
     }
+  }
+
+  static showAndBind() {
+    showScreen(this.view);
+    this.view.onReplay = () => {
+      App.showWelcome();
+    };
   }
 
   static uploadResults(data) {
