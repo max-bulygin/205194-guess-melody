@@ -2,6 +2,7 @@ import {initialState as initial} from './data/game-data';
 import welcome from './controller/welcome';
 import result from './controller/result';
 import level from './controller/level';
+import loader from './controller/loader';
 import timer from './timer';
 import adapt from './data/data-adapter';
 import Loader from './loader';
@@ -27,18 +28,19 @@ const loadGame = (data) => {
 export default class Application {
 
   static load() {
-    try {
-      Loader.loadData().
-          then(adapt).
-          then((levels) => {
-            Application.init(levels);
+    Application.showLoader();
+    Loader.loadData().
+        then(adapt).
+        then((levels) => {
+          Application.init(levels);
+        }).
+        catch((error) => {
+          Application.showLoader({
+            heading: `Ой, что-то не так...`,
+            message: error.message,
+            button: `Попробовать ещё раз`
           });
-    } catch (e) {
-      // splash.showError(e.message);
-      console.log(e.message);
-    } finally {
-      // splash.stop();
-    }
+        });
   }
 
   static init(levels) {
@@ -66,6 +68,10 @@ export default class Application {
     if (controller) {
       controller.init(data);
     }
+  }
+
+  static showLoader(content) {
+    loader.init(content);
   }
 
   static showWelcome() {

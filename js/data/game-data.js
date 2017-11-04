@@ -34,6 +34,11 @@ export const SCREENS = {
   winner: {
     heading: `Вы настоящий меломан!`,
     button: `Сыграть ещё раз`
+  },
+  loader: {
+    heading: `Пожалуйста подождите`,
+    message: `Приложение загружает данные...`,
+    button: ``
   }
 };
 
