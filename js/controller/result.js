@@ -11,7 +11,11 @@ class Result {
     timer.stop();
     this.game = game;
     this.setView();
-    Result.showAndBind();
+    if (!this.view) {
+      App.showLoader();
+    } else {
+      Result.showAndBind();
+    }
   }
 
   setView() {
@@ -22,18 +26,18 @@ class Result {
       this.view = new LossView(SCREENS.attempts);
     }
     if (this.game.isComplete) {
+      const that = this;
+
       Result.uploadResults({
         time: TIME_TOTAL - this.game.time,
         score: getScore(this.game.userAnswers)
       });
-      const that = this;
       Result.getLeaderBoard().
           then((board) => {
             that.view = new WinView(that.game, board);
           }).then(() => {
             Result.showAndBind();
           });
-      App.showLoader();
     }
   }
 
