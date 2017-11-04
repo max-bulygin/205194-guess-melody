@@ -14,7 +14,10 @@ class Result {
     if (!this.view) {
       App.showLoader();
     } else {
-      Result.showAndBind();
+      showScreen(this.view);
+      this.view.onReplay = () => {
+        App.showWelcome();
+      };
     }
   }
 
@@ -35,17 +38,14 @@ class Result {
       Result.getLeaderBoard().
           then((board) => {
             that.view = new WinView(that.game, board);
-          }).then(() => {
-            Result.showAndBind();
+            return that.view;
+          }).then((view) => {
+            showScreen(view);
+            view.onReplay = () => {
+              App.showWelcome();
+            };
           });
     }
-  }
-
-  static showAndBind() {
-    showScreen(this.view);
-    this.view.onReplay = () => {
-      App.showWelcome();
-    };
   }
 
   static uploadResults(data) {
