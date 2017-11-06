@@ -28,7 +28,7 @@ class Timer {
       this._time--;
       return true;
     }
-    return this.time !== 0;
+    return false;
   }
 
   start() {
